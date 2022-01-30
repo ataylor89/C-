@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <cstring>
 using namespace std;
 
 struct ListNode {
@@ -71,21 +73,22 @@ string to_string(ListNode* node) {
 
 int main(int argc, char **argv) {
 	Solution solution;
-	ListNode *sum = new ListNode;
-	int n;
-	while (cin >> n) {
-		ListNode *node = linked_list(n);
-		sum = solution.addTwoNumbers(sum, node);	
-		string result = to_string(sum);
-		cout << "Sum: " << result << endl;
-	}	
+	ListNode *sum, *l1, *l2;
+	char *line;
+	char *token;
+	int num1, num2;
 
-	// ListNode *l1 = linked_list(243);
-	// ListNode *l2 = linked_list(564);
+	cout << "Input two numbers separated by a space" << endl;
+	cout << "Input: ";
+	scanf("%d %d", &num1, &num2);
 
-	// Solution solution;
-	// ListNode *sum = solution.addTwoNumbers(l1, l2);
+	l1 = linked_list(num1);
+	l2 = linked_list(num2);
 
-	// cout << "Sum: " << result << endl;
+	sum = solution.addTwoNumbers(l1, l2);
+	string result = to_string(sum);
+
+	cout << "Sum: " << result << endl;
+
 	return 0;
 }
