@@ -32,7 +32,6 @@ BigInteger* BigInteger::add(BigInteger *b) {
         l3++;
     }
     *l3 = '\0';
-    cout << "strlen(result) = " << strlen(result) << endl;
     return new BigInteger(result);
 }
 
