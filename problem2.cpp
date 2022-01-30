@@ -60,27 +60,27 @@ ListNode *linked_list(char *num) {
     return head;
 }
 
-char* to_string(ListNode* node) {
-    char *str = (char *) malloc(sizeof(char) * 50);
+void to_string(ListNode* node, char *str) {
     int i = 0;
     while (node) {
         str[i] = node->val + '0';
         node = node->next;
         i++;
     }
+    str[i] = '\0';
     for (int j = 0; j < i/2; j++) {
         char save = str[i-j-1];
         str[i-j-1] = str[j];
         str[j] = save;
     }
-    return str;   
 }
 
 int main(int argc, char **argv) {
     Solution solution;
     ListNode *sum, *l1, *l2;
     char num1[50], num2[50];
-        
+    char result[100];    
+
     cout << "Input two numbers separated by a space" << endl;
     cout << "First number: ";
     scanf("%49s", num1);
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
     l2 = linked_list(num2);
 
     sum = solution.addTwoNumbers(l1, l2);
-    char *result = to_string(sum);
+    to_string(sum, result);
     
     printf("Sum: %s\n", result);
 
