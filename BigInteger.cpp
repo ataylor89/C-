@@ -28,7 +28,7 @@ class BigInteger {
             }
         }
         BigInteger(ListNode *head) : head(head) {
-            ListNode *node = this->head;
+            ListNode *node = head;
             char str[50];
             int i = 0;
             while (node) {
