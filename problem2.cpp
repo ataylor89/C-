@@ -1,6 +1,4 @@
 #include <iostream>
-#include <algorithm>
-#include <string>
 #include <cstring>
 using namespace std;
 
@@ -47,13 +45,14 @@ public:
     }
 };
 
-ListNode* linked_list(int num) {
+ListNode *linked_list(char *num) {
     ListNode *head = new ListNode;
     ListNode *tail = head;
-    while (num > 0) {
-        tail->val = num % 10;
-        num /= 10;
-        if (num > 0) {
+    int len = strlen(num);
+    for (int i = 0; i < len; i++) {
+        int digit = num[len-1-i] - '0';
+        tail->val = digit;
+        if (i < len-1) {
             tail->next = new ListNode;
             tail = tail->next;
         }
@@ -61,34 +60,40 @@ ListNode* linked_list(int num) {
     return head;
 }
 
-string to_string(ListNode* node) {
-    string result;
+char* to_string(ListNode* node) {
+    char *str = (char *) malloc(sizeof(char) * 50);
+    int i = 0;
     while (node) {
-        result += to_string(node->val);
+        str[i] = node->val + '0';
         node = node->next;
+        i++;
     }
-    reverse(result.begin(), result.end());
-    return result;
+    for (int j = 0; j < i/2; j++) {
+        char save = str[i-j-1];
+        str[i-j-1] = str[j];
+        str[j] = save;
+    }
+    return str;   
 }
 
 int main(int argc, char **argv) {
     Solution solution;
     ListNode *sum, *l1, *l2;
-    char *line;
-    char *token;
-    int num1, num2;
-
+    char num1[50], num2[50];
+        
     cout << "Input two numbers separated by a space" << endl;
-    cout << "Input: ";
-    scanf("%d %d", &num1, &num2);
+    cout << "First number: ";
+    scanf("%49s", num1);
+    cout << "Second number: ";
+    scanf("%49s", num2);
 
     l1 = linked_list(num1);
     l2 = linked_list(num2);
 
     sum = solution.addTwoNumbers(l1, l2);
-    string result = to_string(sum);
-
-    cout << "Sum: " << result << endl;
+    char *result = to_string(sum);
+    
+    printf("Sum: %s\n", result);
 
     return 0;
 }
